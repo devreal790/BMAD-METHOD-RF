@@ -1,0 +1,260 @@
+# <!-- Powered by BMAD™ Core -->
+template:
+  id: design-principles-template-v1
+  name: Design Principles & Checklist
+  version: 1.0
+  output:
+    format: markdown
+    filename: context/design-principles.md
+    title: "{{project_name}} Design Principles & Checklist"
+
+workflow:
+  mode: interactive
+  elicitation: advanced-elicitation
+
+sections:
+  - id: title
+    title: "{{project_name}} Design Checklist"
+    instruction: |
+      Create a comprehensive design checklist inspired by industry leaders (Stripe, Airbnb, Linear, etc.).
+      Adapt the checklist to the specific needs and context of the project.
+      Use the S-Tier SaaS Dashboard Design Checklist as a reference but customize for project requirements.
+
+  - id: core-philosophy
+    title: Core Design Philosophy & Strategy
+    instruction: |
+      Work with the user to establish fundamental design principles that will guide all design decisions.
+      These principles should reflect the project's values, target users, and business goals.
+      Focus on 8-12 core principles that are specific, actionable, and memorable.
+    elicit: true
+    sections:
+      - id: philosophy-items
+        type: checklist
+        repeatable: true
+        template: |
+          - [ ] **{{principle_name}}:** {{principle_description}}
+        examples:
+          - "- [ ] **Users First:** Prioritize user needs, workflows, and ease of use in every design decision."
+          - "- [ ] **Speed & Performance:** Design for fast load times and snappy, responsive interactions."
+          - "- [ ] **Simplicity & Clarity:** Strive for a clean, uncluttered interface with unambiguous labels and instructions."
+          - "- [ ] **Consistency:** Maintain a uniform design language (colors, typography, components, patterns) across the entire application."
+          - "- [ ] **Accessibility (WCAG AA+):** Design for inclusivity with sufficient contrast, keyboard navigability, and screen reader compatibility."
+
+  - id: design-system
+    title: Design System Foundation (Tokens & Core Components)
+    instruction: |
+      Define the foundational elements of the design system including:
+      1. Color palette (primary, neutrals, semantic colors, dark mode)
+      2. Typography scale (fonts, sizes, weights, line heights)
+      3. Spacing units and grid system
+      4. Border radii and other design tokens
+      5. Core UI components with consistent states
+
+      Each element should have clear acceptance criteria in checklist format.
+    elicit: true
+    sections:
+      - id: color-palette
+        title: Define a Color Palette
+        type: checklist
+        template: |
+          - [ ] **Primary Brand Color:** {{primary_color_spec}}
+          - [ ] **Neutrals:** {{neutral_spec}}
+          - [ ] **Semantic Colors:** {{semantic_colors_spec}}
+          - [ ] **Dark Mode Palette:** {{dark_mode_spec}}
+          - [ ] **Accessibility Check:** {{accessibility_check_spec}}
+        examples:
+          - "- [ ] **Primary Brand Color:** User-specified, used strategically for key actions and branding"
+          - "- [ ] **Neutrals:** A scale of grays (5-7 steps) for text, backgrounds, borders"
+          - "- [ ] **Semantic Colors:** Success (green), Error (red), Warning (yellow/amber), Info (blue)"
+
+      - id: typography
+        title: Establish a Typographic Scale
+        type: checklist
+        template: |
+          - [ ] **Primary Font Family:** {{font_family_spec}}
+          - [ ] **Modular Scale:** {{type_scale_spec}}
+          - [ ] **Font Weights:** {{font_weights_spec}}
+          - [ ] **Line Height:** {{line_height_spec}}
+
+      - id: spacing
+        title: Define Spacing Units
+        type: checklist
+        template: |
+          - [ ] **Base Unit:** {{base_unit_spec}}
+          - [ ] **Spacing Scale:** {{spacing_scale_spec}}
+
+      - id: border-radii
+        title: Define Border Radii
+        type: checklist
+        template: |
+          - [ ] **Consistent Values:** {{border_radius_spec}}
+
+      - id: core-components
+        title: Develop Core UI Components
+        instruction: |
+          List all core UI components needed for the project. Each component should support
+          consistent states: default, hover, active, focus, disabled.
+        type: checklist
+        repeatable: true
+        template: "- [ ] {{component_name}} ({{component_description}})"
+        examples:
+          - "- [ ] Buttons (primary, secondary, tertiary/ghost, destructive, link-style; with icon options)"
+          - "- [ ] Input Fields (text, textarea, select, date picker; with labels, placeholders, helper text, error messages)"
+          - "- [ ] Cards (for content blocks, multimedia items, dashboard widgets)"
+          - "- [ ] Tables (with headers, rows, cells; support for sorting, filtering)"
+          - "- [ ] Modals/Dialogs (for confirmations, forms, detailed views)"
+
+  - id: layout-hierarchy
+    title: Layout, Visual Hierarchy & Structure
+    instruction: |
+      Define how content will be organized and structured across the application.
+      Focus on responsive design, white space, visual hierarchy, and consistent layout patterns.
+    elicit: true
+    sections:
+      - id: layout-items
+        type: checklist
+        repeatable: true
+        template: "- [ ] **{{layout_principle}}:** {{layout_description}}"
+        examples:
+          - "- [ ] **Responsive Grid System:** Design based on a responsive grid (e.g., 12-column) for consistent layout across devices"
+          - "- [ ] **Strategic White Space:** Use ample negative space to improve clarity and reduce cognitive load"
+          - "- [ ] **Clear Visual Hierarchy:** Guide the user's eye using typography, spacing, and element positioning"
+          - "- [ ] **Mobile-First Considerations:** Ensure design adapts gracefully to smaller screens"
+
+  - id: interaction-design
+    title: Interaction Design & Animations
+    instruction: |
+      Define standards for micro-interactions, animations, loading states, and transitions.
+      Focus on purposeful, performant animations that enhance usability.
+    elicit: true
+    sections:
+      - id: interaction-items
+        type: checklist
+        repeatable: true
+        template: "- [ ] **{{interaction_principle}}:** {{interaction_description}}"
+        examples:
+          - "- [ ] **Purposeful Micro-interactions:** Use subtle animations for user actions (150-300ms with appropriate easing)"
+          - "- [ ] **Loading States:** Implement clear loading indicators (skeleton screens, spinners)"
+          - "- [ ] **Smooth Transitions:** Use transitions for state changes and modal appearances"
+          - "- [ ] **Keyboard Navigation:** Ensure all interactive elements are keyboard accessible with clear focus states"
+
+  - id: module-specific
+    title: Module-Specific Design Tactics
+    instruction: |
+      For each major module or feature area in the application, define specific design
+      requirements and best practices. Create subsections for each module.
+      Common modules include: multimedia/content display, data tables, forms, configuration panels, etc.
+    elicit: true
+    repeatable: true
+    sections:
+      - id: module
+        title: "{{module_name}} Module"
+        instruction: |
+          Define specific design tactics for this module. Consider:
+          - Primary user tasks and workflows
+          - Key UI elements and interactions
+          - Performance and efficiency requirements
+          - Mobile/responsive considerations
+        type: checklist
+        repeatable: true
+        template: "- [ ] **{{tactic_name}}:** {{tactic_description}}"
+        examples:
+          - "### A. Data Tables Module"
+          - "- [ ] **Readability & Scannability:** Left-align text, right-align numbers, bold headers"
+          - "- [ ] **Interactive Controls:** Column sorting, filtering, global search"
+          - "- [ ] **Large Datasets:** Pagination or virtual scroll with sticky headers"
+          - "- [ ] **Row Interactions:** Expandable rows, inline editing, bulk actions"
+
+  - id: css-architecture
+    title: CSS & Styling Architecture
+    instruction: |
+      Define the CSS methodology and architecture approach for the project.
+      Consider scalability, maintainability, and integration with design tokens.
+    elicit: true
+    sections:
+      - id: css-items
+        type: checklist
+        repeatable: true
+        template: "- [ ] **{{css_principle}}:** {{css_description}}"
+        examples:
+          - "- [ ] **Choose a Scalable CSS Methodology:** e.g., Utility-First (Tailwind CSS), BEM with Sass, or CSS-in-JS"
+          - "- [ ] **Integrate Design Tokens:** Ensure colors, fonts, spacing tokens are directly usable in CSS architecture"
+          - "- [ ] **Maintainability & Readability:** Code should be well-organized and easy to understand"
+          - "- [ ] **Performance:** Optimize CSS delivery; avoid unnecessary bloat"
+
+  - id: best-practices
+    title: General Best Practices
+    instruction: |
+      Define additional best practices that don't fit into other categories but are important
+      for maintaining design quality and consistency.
+    elicit: true
+    sections:
+      - id: practice-items
+        type: checklist
+        repeatable: true
+        template: "- [ ] {{practice_description}}"
+        examples:
+          - "- [ ] **Iterative Design & Testing:** Continuously test with users and iterate on designs"
+          - "- [ ] **Clear Information Architecture:** Organize content and navigation logically"
+          - "- [ ] **Responsive Design:** Ensure full functionality and great appearance on all device sizes"
+          - "- [ ] **Documentation:** Maintain clear documentation for the design system and components"
+
+  - id: project-specific
+    title: Project-Specific Considerations
+    instruction: |
+      Add any project-specific design requirements, constraints, or considerations that
+      don't fit into the standard categories above. This section is optional but recommended
+      for projects with unique needs.
+    elicit: true
+    optional: true
+    sections:
+      - id: custom-items
+        type: checklist
+        repeatable: true
+        template: "- [ ] {{custom_requirement}}"
+
+  - id: changelog
+    title: Change Log
+    type: table
+    columns: [Date, Version, Changes, Author]
+    instruction: Track updates to this design principles document over time
+    rows:
+      - ["{{date}}", "1.0", "Initial design principles created", "{{author}}"]
+
+  - id: next-steps
+    title: Implementation & Validation
+    instruction: |
+      After creating the design principles checklist:
+
+      1. Review with design team and stakeholders
+      2. Integrate into development workflow (code reviews, design reviews)
+      3. Create validation process to check designs against principles
+      4. Plan for periodic reviews and updates to keep principles relevant
+    sections:
+      - id: validation-process
+        title: Validation Process
+        template: |
+          **How to Use This Checklist:**
+          {{usage_instructions}}
+
+          **Review Cadence:**
+          {{review_cadence}}
+
+          **Ownership:**
+          {{ownership}}
+        examples:
+          - |
+            **How to Use This Checklist:**
+            - Use during design reviews before implementation
+            - Reference when making design decisions or resolving debates
+            - Include in PR templates for front-end changes
+            - Review quarterly to ensure principles remain relevant
+
+            **Review Cadence:**
+            - Design review: Every feature before development
+            - Principle review: Quarterly or when major design changes occur
+
+            **Ownership:**
+            - UX Lead: Maintains and updates this document
+            - Design team: Ensures compliance in daily work
+            - Engineering: Validates implementation matches principles

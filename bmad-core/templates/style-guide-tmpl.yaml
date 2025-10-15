@@ -1,0 +1,626 @@
+# <!-- Powered by BMAD™ Core -->
+template:
+  id: style-guide-template-v1
+  name: Style Guide Specification
+  version: 1.0
+  output:
+    format: markdown
+    filename: context/style-guide.md
+    title: "{{project_name}} Style Guide"
+
+workflow:
+  mode: interactive
+  elicitation: advanced-elicitation
+
+sections:
+  - id: introduction
+    title: Style Guide
+    instruction: |
+      Review the project brief, design documentation, and existing brand guidelines. This style guide defines the visual design language for the application and ensures consistency across all UI elements.
+    content: |
+      ## {{project_name}}
+
+      This style guide defines the visual design language for the {{project_name}} application. It provides specifications for colors, typography, spacing, components, and visual elements to ensure consistency across the entire application.
+    sections:
+      - id: table-of-contents
+        title: Table of Contents
+        type: bullet-list
+        instruction: Auto-generated from section titles
+
+      - id: brand-identity
+        title: Brand Identity
+        instruction: |
+          Establish the brand foundation by defining:
+          1. Target audience segments
+          2. Brand personality traits
+          3. Core design philosophy
+
+          Work with stakeholders to articulate what makes this brand unique.
+        elicit: true
+        sections:
+          - id: target-audience
+            title: Target Audience
+            template: |
+              - **Primary:** {{primary_audience}}
+              - **Secondary:** {{secondary_audience}}
+              - **Tertiary:** {{tertiary_audience}}
+          - id: brand-personality
+            title: Brand Personality
+            template: |
+              - **{{trait_1}}** yet {{contrast_1}}
+              - **{{trait_2}}** with {{quality_1}}
+              - **{{trait_3}}** and {{quality_2}}
+              - **{{trait_4}}** but not {{avoidance_1}}
+              - **{{trait_5}}** and {{quality_3}}
+          - id: design-philosophy
+            title: Design Philosophy
+            template: "{{design_philosophy_description}}"
+
+  - id: color-system
+    title: Color System
+    instruction: |
+      Define the complete color system using HSL format for consistency.
+
+      1. Primary colors (brand identity)
+      2. Semantic colors (success, error, warning)
+      3. Neutral colors (backgrounds, text)
+      4. UI element colors (cards, sidebars, etc.)
+      5. Gradients and special effects
+
+      Include usage guidelines and accessibility considerations.
+    elicit: true
+    content: |
+      All colors are defined using HSL (Hue, Saturation, Lightness) format for consistency and easy manipulation. Colors are accessed via CSS custom properties.
+    sections:
+      - id: primary-colors
+        title: Primary Colors
+        repeatable: true
+        sections:
+          - id: primary-color
+            title: "{{color_name}}"
+            template: |
+              **Purpose**: {{color_purpose}}
+
+              ```css
+              {{css_variables}}
+              ```
+
+              **Usage**:
+              - {{usage_1}}
+              - {{usage_2}}
+              - {{usage_3}}
+              - {{usage_4}}
+
+              **Visual**:
+              - Base: `{{base_hsl}}` - {{base_description}}
+              - Hover: {{hover_description}}
+              - Light: {{light_description}}
+
+      - id: semantic-colors
+        title: Semantic Colors
+        repeatable: true
+        sections:
+          - id: semantic-color
+            title: "{{semantic_color_name}}"
+            template: |
+              **Purpose**: {{semantic_purpose}}
+
+              ```css
+              {{semantic_css_variables}}
+              ```
+
+              **Usage**:
+              - {{semantic_usage_1}}
+              - {{semantic_usage_2}}
+              - {{semantic_usage_3}}
+              - {{semantic_usage_4}}
+
+      - id: neutral-colors
+        title: Neutral Colors
+        repeatable: true
+        sections:
+          - id: neutral-section
+            title: "{{neutral_section_name}}"
+            template: |
+              ```css
+              {{neutral_css_variables}}
+              ```
+
+              **Usage**:
+              - {{neutral_usage_1}}
+              - {{neutral_usage_2}}
+              - {{neutral_usage_3}}
+
+      - id: ui-element-colors
+        title: UI Element Colors
+        repeatable: true
+        sections:
+          - id: ui-color
+            title: "{{ui_element_name}}"
+            template: |
+              ```css
+              {{ui_css_variables}}
+              ```
+
+      - id: gradients
+        title: Gradients
+        template: |
+          Pre-defined gradient combinations:
+
+          ```css
+          {{gradient_definitions}}
+          ```
+
+          **Usage Classes**:
+          ```tsx
+          {{gradient_usage_examples}}
+          ```
+
+      - id: color-guidelines
+        title: Color Usage Guidelines
+        template: |
+          #### Do's:
+          {{dos_list}}
+
+          #### Don'ts:
+          {{donts_list}}
+
+  - id: typography
+    title: Typography
+    instruction: |
+      Define the complete typography system:
+
+      1. Font families and their purposes
+      2. Typography scale (headings, body text)
+      3. Line heights and letter spacing
+      4. Special typography treatments
+
+      Consider internationalization needs (e.g., Thai language support).
+    elicit: true
+    sections:
+      - id: font-families
+        title: Font Families
+        sections:
+          - id: primary-font
+            title: "Primary Font: {{primary_font_name}}"
+            template: |
+              ```css
+              font-family: {{font_family_definition}};
+              ```
+
+              **Weights Available**:
+              - {{weight_1}}
+              - {{weight_2}}
+              - {{weight_3}}
+              - {{weight_4}}
+              - {{weight_5}}
+
+              **Rationale**: {{font_rationale}}
+
+      - id: typography-scale
+        title: Typography Scale
+        sections:
+          - id: headings
+            title: Headings
+            template: |
+              ```tsx
+              {{heading_examples}}
+              ```
+          - id: body-text
+            title: Body Text
+            template: |
+              ```tsx
+              {{body_text_examples}}
+              ```
+          - id: special-typography
+            title: Special Typography
+            template: |
+              ```tsx
+              {{special_typography_examples}}
+              ```
+
+      - id: line-height
+        title: Line Height
+        template: |
+          ```css
+          {{line_height_definitions}}
+          ```
+
+      - id: letter-spacing
+        title: Letter Spacing
+        template: |
+          ```css
+          {{letter_spacing_definitions}}
+          ```
+
+      - id: typography-examples
+        title: Typography Examples
+        repeatable: true
+        sections:
+          - id: typo-example
+            title: "{{example_name}}"
+            template: |
+              ```tsx
+              {{example_code}}
+              ```
+
+  - id: spacing-layout
+    title: Spacing & Layout
+    instruction: |
+      Define the spacing system and layout patterns:
+
+      1. Base spacing scale (4px/8px grid)
+      2. Common spacing patterns
+      3. Layout containers
+      4. Grid systems
+      5. Border radius and shadows
+    elicit: true
+    sections:
+      - id: spacing-scale
+        title: Spacing Scale
+        template: |
+          Based on {{grid_base}} grid system:
+
+          ```css
+          {{spacing_scale_definitions}}
+          ```
+
+      - id: spacing-patterns
+        title: Common Spacing Patterns
+        repeatable: true
+        sections:
+          - id: spacing-pattern
+            title: "{{pattern_name}}"
+            template: |
+              ```tsx
+              {{pattern_examples}}
+              ```
+
+      - id: layout-containers
+        title: Layout Containers
+        sections:
+          - id: page-container
+            title: Page Container
+            template: |
+              ```tsx
+              {{page_container_example}}
+              ```
+          - id: content-width
+            title: Content Width Constraints
+            template: |
+              ```tsx
+              {{width_constraint_examples}}
+              ```
+
+      - id: grid-systems
+        title: Grid Systems
+        repeatable: true
+        sections:
+          - id: grid-pattern
+            title: "{{grid_name}}"
+            template: |
+              ```tsx
+              {{grid_example}}
+              ```
+
+      - id: border-radius
+        title: Border Radius
+        template: |
+          ```css
+          {{border_radius_definitions}}
+          ```
+
+      - id: shadows
+        title: Shadows
+        template: |
+          ```css
+          {{shadow_definitions}}
+          ```
+
+          **Usage**:
+          ```tsx
+          {{shadow_usage_examples}}
+          ```
+
+  - id: components
+    title: Components
+    instruction: |
+      Document all reusable UI components with:
+
+      1. Variants (different styles)
+      2. Sizes (small, default, large)
+      3. States (loading, disabled, active)
+      4. Usage examples
+
+      Focus on component patterns, not implementation details.
+    elicit: true
+    repeatable: true
+    sections:
+      - id: component-category
+        title: "{{component_category_name}}"
+        sections:
+          - id: variants
+            title: Variants
+            template: |
+              ```tsx
+              {{variant_examples}}
+              ```
+          - id: sizes
+            title: Sizes
+            template: |
+              ```tsx
+              {{size_examples}}
+              ```
+          - id: states
+            title: States
+            template: |
+              ```tsx
+              {{state_examples}}
+              ```
+
+  - id: icons-imagery
+    title: Icons & Imagery
+    instruction: |
+      Define standards for:
+
+      1. Icon library and sizing
+      2. Common icons and their meanings
+      3. Icon usage guidelines
+      4. Image specifications (formats, sizes, ratios)
+      5. Optimization strategies
+    elicit: true
+    sections:
+      - id: icon-library
+        title: "Icon Library: {{icon_library_name}}"
+        template: |
+          **Why {{icon_library_name}}**: {{icon_library_rationale}}
+
+      - id: icon-sizing
+        title: Icon Sizing
+        template: |
+          ```tsx
+          {{icon_size_examples}}
+          ```
+
+      - id: common-icons
+        title: Common Icons
+        template: |
+          ```tsx
+          {{common_icons_import}}
+          ```
+
+      - id: icon-guidelines
+        title: Icon Usage Guidelines
+        template: |
+          #### Do's:
+          {{icon_dos}}
+
+          #### Don'ts:
+          {{icon_donts}}
+
+      - id: image-guidelines
+        title: Image Guidelines
+        repeatable: true
+        sections:
+          - id: image-type
+            title: "{{image_type_name}}"
+            template: |
+              - Format: {{image_format}}
+              - Max width: {{max_width}}
+              - Aspect ratio: {{aspect_ratio}}
+              - Apply: `{{css_classes}}`
+
+      - id: optimization
+        title: Optimization
+        type: bullet-list
+        template: "- {{optimization_tip}}"
+
+  - id: animations-transitions
+    title: Animations & Transitions
+    instruction: |
+      Define motion design standards:
+
+      1. Animation principles
+      2. Standard transitions
+      3. Predefined animations
+      4. Hover effects
+      5. Loading animations
+      6. Motion preferences (accessibility)
+    elicit: true
+    sections:
+      - id: animation-principles
+        title: Animation Principles
+        type: numbered-list
+        template: "{{principle_number}}. **{{principle_name}}**: {{principle_description}}"
+
+      - id: standard-transitions
+        title: Standard Transitions
+        template: |
+          ```css
+          {{transition_definitions}}
+          ```
+
+      - id: predefined-animations
+        title: Predefined Animations
+        repeatable: true
+        sections:
+          - id: animation
+            title: "{{animation_name}}"
+            template: |
+              ```tsx
+              {{animation_tsx_example}}
+              ```
+
+              ```css
+              {{animation_css_keyframes}}
+              ```
+
+      - id: hover-effects
+        title: Hover Effects
+        repeatable: true
+        sections:
+          - id: hover-effect
+            title: "{{hover_effect_name}}"
+            template: |
+              ```tsx
+              {{hover_effect_example}}
+              ```
+
+      - id: loading-animations
+        title: Loading Animations
+        repeatable: true
+        sections:
+          - id: loading-animation
+            title: "{{loading_animation_name}}"
+            template: |
+              ```tsx
+              {{loading_tsx_example}}
+              ```
+
+              ```css
+              {{loading_css_keyframes}}
+              ```
+
+      - id: motion-preferences
+        title: Motion Preferences
+        template: |
+          Always respect user's motion preferences:
+
+          ```css
+          {{motion_preferences_css}}
+          ```
+
+  - id: responsive-design
+    title: Responsive Design
+    instruction: |
+      Define responsive design strategy:
+
+      1. Breakpoints and target devices
+      2. Mobile-first approach
+      3. Common responsive patterns
+      4. Touch-friendly design considerations
+    elicit: true
+    sections:
+      - id: breakpoints
+        title: Breakpoints
+        template: |
+          ```typescript
+          {{breakpoint_definitions}}
+          ```
+
+      - id: mobile-first
+        title: Mobile-First Approach
+        template: |
+          Always design for mobile first, then enhance for larger screens:
+
+          ```tsx
+          {{mobile_first_example}}
+          ```
+
+      - id: responsive-patterns
+        title: Common Responsive Patterns
+        repeatable: true
+        sections:
+          - id: responsive-pattern
+            title: "{{responsive_pattern_name}}"
+            template: |
+              ```tsx
+              {{responsive_pattern_example}}
+              ```
+
+      - id: touch-friendly
+        title: Touch-Friendly Design
+        sections:
+          - id: touch-targets
+            title: Minimum Touch Targets
+            template: |
+              ```tsx
+              {{touch_target_example}}
+              ```
+          - id: touch-spacing
+            title: Touch-Optimized Spacing
+            template: |
+              ```tsx
+              {{touch_spacing_example}}
+              ```
+
+  - id: usage-examples
+    title: Usage Examples
+    instruction: |
+      Provide complete, real-world examples combining multiple style guide elements. Show how different patterns work together in context.
+    elicit: true
+    repeatable: true
+    sections:
+      - id: complete-example
+        title: "Complete {{example_component}} Example"
+        template: |
+          ```tsx
+          {{complete_example_code}}
+          ```
+
+  - id: maintenance
+    title: Maintenance & Updates
+    instruction: |
+      Document version history, review schedule, and contribution guidelines.
+    sections:
+      - id: version-history
+        title: Version History
+        type: bullet-list
+        template: "- **{{version}}** ({{date}}): {{changes}}"
+
+      - id: review-schedule
+        title: Review Schedule
+        template: |
+          This style guide should be reviewed and updated:
+          - **Quarterly**: {{quarterly_scope}}
+          - **Annually**: {{annual_scope}}
+          - **As needed**: {{adhoc_scope}}
+
+      - id: contributing
+        title: Contributing
+        template: |
+          When adding new components or patterns:
+          {{contribution_steps}}
+
+  - id: quick-reference
+    title: Quick Reference
+    instruction: |
+      Provide quick-reference snippets for the most commonly used patterns. This section helps developers quickly access frequent patterns without searching the full guide.
+    sections:
+      - id: color-variables
+        title: Color Variables
+        template: |
+          ```css
+          {{common_color_variables}}
+          ```
+
+      - id: common-spacing
+        title: Common Spacing
+        template: |
+          ```tsx
+          {{common_spacing_examples}}
+          ```
+
+      - id: typography-quick
+        title: Typography
+        template: |
+          ```tsx
+          {{common_typography_examples}}
+          ```
+
+      - id: shadows-quick
+        title: Shadows
+        template: |
+          ```tsx
+          {{common_shadow_examples}}
+          ```
+
+  - id: metadata
+    title: Document Metadata
+    instruction: Automatically populate document metadata
+    template: |
+      ---
+
+      **Last Updated**: {{last_updated_date}}
+      **Maintained By**: {{maintainer}}
+      **Related Docs**: {{related_docs}}
