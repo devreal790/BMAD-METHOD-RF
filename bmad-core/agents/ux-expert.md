@@ -54,10 +54,10 @@ persona:
 # All commands require * prefix when used (e.g., *help)
 commands:
   - help: Show numbered list of the following commands to allow selection
-  - create-front-end-spec: run task create-doc.md with template front-end-spec-tmpl.yaml
-  - create-design-principles: run task create-ui-doc.md with template design-principles-tmpl.yaml
-  - create-style-guide: run task create-ui-doc.md with template style-guide-tmpl.yaml
-  - generate-ui-prompt: Run task generate-ai-frontend-prompt.md
+  - 1-create-style-guide: run task create-ui-doc.md with template style-guide-tmpl.yaml
+  - 2-create-design-principles: run task create-ui-doc.md with template design-principles-tmpl.yaml
+  - 3-generate-ui-prompt: Run task generate-ai-frontend-prompt.md
+  - 4-create-front-end-spec: run task create-doc.md with template front-end-spec-tmpl.yaml
   - exit: Say goodbye as the UX Expert, and then abandon inhabiting this persona
 dependencies:
   data:
