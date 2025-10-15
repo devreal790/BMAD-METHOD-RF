@@ -5,7 +5,7 @@ template:
   version: 1.0
   output:
     format: markdown
-    filename: context/design-principles.md
+    filename: docs/ui/design-principles.md
     title: "{{project_name}} Design Principles & Checklist"
 
 workflow:
